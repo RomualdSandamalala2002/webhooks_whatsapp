@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
     
     @GetMapping("/webhook")
-    public ResponseEntity<String> webhookAuthentification(
+    public ResponseEntity<Integer> webhookAuthentification(
         @RequestParam(name = "hub.verify_token") String token,
         @RequestParam(name = "hub.mode") String mode,
         @RequestParam(name = "hub.challenge") int challenge
         ){
-       return ResponseEntity.ok("");     
+       return ResponseEntity.ok(challenge);     
     }
 
     @PostMapping("/webhook")
