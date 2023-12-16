@@ -23,6 +23,7 @@ public class MainController {
 
     @PostMapping("/webhook")
     public ResponseEntity<Object> response(@RequestBody Object bodyPayload){
+        System.out.println(bodyPayload);
         return ResponseEntity.ok(bodyPayload);
     }
 }
