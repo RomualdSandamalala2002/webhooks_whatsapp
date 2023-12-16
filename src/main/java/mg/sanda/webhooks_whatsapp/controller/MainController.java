@@ -15,8 +15,8 @@ public class MainController {
     @GetMapping("/webhook")
     public ResponseEntity<String> webhookAuthentification(
         @RequestParam(name = "hub.verify_token") String token,
-        @RequestParam(name = "hub.mode") int mode,
-        @RequestParam(name = "hub.challenge") String challenge
+        @RequestParam(name = "hub.mode") String mode,
+        @RequestParam(name = "hub.challenge") int challenge
         ){
        return ResponseEntity.ok("");     
     }
