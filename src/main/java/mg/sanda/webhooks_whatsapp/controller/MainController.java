@@ -34,11 +34,14 @@ public class MainController {
                 .defaultHeader("Authorization", "EAAMoG9OXI6UBO37XIeDBIP1GHthXVJdb2248qcQrU7PxzQNcOATnLVdxVCA5UkjdCHjrvuUL7waQSf7VdkgfSAm752Ufo2HR9XQ3J5oN62OhzReJxxEYC6qJx5iM2ybhODZAR3kkklTzp9qNeE5vAimAjz2AZBqydZCdZBVJphvRvpfhnktnqDXeBHZBxZBhe8HY0OfhqvuICrQZBRKKjaafI3ZAyu6n1ZAJ6hPwZD")
                 .build();
 
-        graphAPI.post()
+        Object response = graphAPI.post()
                 .body("{\"messaging_product\": \"whatsapp\","
                     +"\"to\": \"0346277634\""
                     +"\"text\": {\"body\" : \"hi\"}"
-                   +"}");
+                   +"}")
+                .retrieve();
+            
+        System.out.println(response);
         return ResponseEntity.ok(bodyPayload);
     }
 }
