@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
 
 import mg.sanda.webhooks_whatsapp.utils.SimpleText;
 import mg.sanda.webhooks_whatsapp.utils.WebhookReqPayload;
@@ -40,21 +41,13 @@ public class MainController {
         
         String token = "EAAMoG9OXI6UBO37XIeDBIP1GHthXVJdb2248qcQrU7PxzQNcOATnLVdxVCA5UkjdCHjrvuUL7waQSf7VdkgfSAm752Ufo2HR9XQ3J5oN62OhzReJxxEYC6qJx5iM2ybhODZAR3kkklTzp9qNeE5vAimAjz2AZBqydZCdZBVJphvRvpfhnktnqDXeBHZBxZBhe8HY0OfhqvuICrQZBRKKjaafI3ZAyu6n1ZAJ6hPwZD";
         String endpoint = mainEndpoint + "?access_token=" + token;
-        RestClient graphAPI = RestClient.builder()
-                .baseUrl(endpoint)
-                .build();
+        RestTemplate messagRestTemplate = new RestTemplate();
 
         SimpleText value = new SimpleText("Bonjour");
         
         WebhookReqPayload payload = new WebhookReqPayload("261346277634",value);
         
-        ResponseEntity<Object> res = graphAPI.post()
-            .contentType(MediaType.APPLICATION_JSON)
-            .accept(MediaType.APPLICATION_JSON)
-            .body(payload)
-            .retrieve()
-            .toEntity(Object.class);
-
+        ResponseEntity<String> res = messagRestTemplate.postForEntity(endpoint, payload, String.class);
         
         return ResponseEntity.ok(res);
     }
