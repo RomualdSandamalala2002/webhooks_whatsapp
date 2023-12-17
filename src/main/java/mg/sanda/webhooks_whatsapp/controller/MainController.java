@@ -34,14 +34,17 @@ public class MainController {
                 .defaultHeader("Authorization", "EAAMoG9OXI6UBO37XIeDBIP1GHthXVJdb2248qcQrU7PxzQNcOATnLVdxVCA5UkjdCHjrvuUL7waQSf7VdkgfSAm752Ufo2HR9XQ3J5oN62OhzReJxxEYC6qJx5iM2ybhODZAR3kkklTzp9qNeE5vAimAjz2AZBqydZCdZBVJphvRvpfhnktnqDXeBHZBxZBhe8HY0OfhqvuICrQZBRKKjaafI3ZAyu6n1ZAJ6hPwZD")
                 .build();
 
-        Object response = graphAPI.post()
+        ResponseEntity<String> response = graphAPI.post()
                 .body("{\"messaging_product\": \"whatsapp\","
                     +"\"to\": \"0346277634\""
                     +"\"text\": {\"body\" : \"hi\"}"
                    +"}")
-                .retrieve();
+                .retrieve()
+                .toEntity(String.class);
             
-        System.out.println(response);
+        System.out.println(response.getBody().toString());
+
+        System.out.println(response.getStatusCode().toString());
         return ResponseEntity.ok(bodyPayload);
     }
 }
